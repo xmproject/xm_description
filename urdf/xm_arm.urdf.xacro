@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<robot name="arm" xmlns:xacro="http://ros.org/wiki/xacro">
+   
+  <!--The lift xacro macro-->
+  <macro name="lift" params="parent name color">
+    <joint name="joint_${name}" type="prismatic">
+      <origin xyz="-0.04456 0.00022708 0.72985" rpy="-2.7756E-17 0 -1.5708" />  
+      <parent link="${parent}_link" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 -1" />
+      <limit lower="-0.15" upper="0.15" effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+  <!--The waist xacro macro--> 
+  <macro name="waist" params="parent name color">
+    <joint name="joint_${name}" type="revolute">
+      <origin xyz="0 0.0945 0.00415" rpy="2.7756E-17 1.3056E-31 -2.8372E-16" />  
+      <parent link="link_${parent}" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.047" upper="1.047" effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+  <!--The big_arm xacro macro-->	
+  <macro name="big_arm" params="parent name color">
+    <joint name="joint_${name}" type="revolute">
+      <origin xyz="0 0.15678 -0.018" rpy="1.5708 -7.7037E-34 1.5708" />  
+      <parent link="link_${parent}" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.920" upper="1.396" effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+  <!--The forearm xacro macro-->	
+  <macro name="forearm" params="parent name color">
+    <joint name="joint_${name}" type="revolute">
+      <origin xyz="0.35 0 0" rpy="-6.4095E-31 2.2204E-16 -7.7037E-34" />  
+      <parent link="link_${parent}" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 -1" />
+      <limit lower="-2.234" upper="2.234" effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+  <!--The wristing_pitching xacro macro-->	
+  <macro name="wrist_pitching" params="parent name color">
+    <joint name="joint_${name}" type="revolute">
+      <origin xyz="0.3 0 0" rpy="0 0 1.5708" />  
+      <parent link="link_${parent}" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 -1" />
+      <limit lower="-2.182" upper="2.182" effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+  <!--The wristing_rotation xacro macro-->	
+  <macro name="wrist_rotation" params="parent name color">
+    <joint name="joint_${name}" type="continuous">
+      <origin xyz="0 0 0" rpy="1.5708 -1.5708 0" />  
+      <parent link="link_${parent}" />
+      <child  link="link_${name}" />
+      <axis xyz="0 0 1" />
+      <limit effort="500" velocity="1" />
+    </joint>
+
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.STL" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://xm_description/meshes/link_${name}.stl" />
+        </geometry>
+      </collision>
+    </link>
+  </macro>
+
+</robot>

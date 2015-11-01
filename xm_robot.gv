@@ -1,5 +1,6 @@
 digraph G {
 node [shape=box];
+"base_footprint" [label="base_footprint"];
 "base_link" [label="base_link"];
 "link_kinect" [label="link_kinect"];
 "link_camera" [label="link_camera"];
@@ -16,6 +17,8 @@ node [shape=box];
 "link_wheel_2" [label="link_wheel_2"];
 "link_wheel_3" [label="link_wheel_3"];
 node [shape=ellipse, color=blue, fontcolor=blue];
+"base_footprint" -> "base_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"base_joint" -> "base_link"
 "base_link" -> "joint_kinect" [label="xyz: -0.06656 0.00022708 1.1145 \nrpy: 1.5708 -0 -6.1679e-17"]
 "joint_kinect" -> "link_kinect"
 "link_kinect" -> "joint_camera" [label="xyz: -0.001 0.032 0 \nrpy: 5.7785e-17 -0 0"]

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<robot name="xm_robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- The following xacro:include files set up definitions of parts of the robot body -->
+  <xacro:include filename="$(find xm_description)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_base.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_arm.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_gripper.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_camera.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_kinect.urdf.xacro" />
+  <xacro:include filename="$(find xm_description)/urdf/xm_laser.urdf.xacro" />
+
+  <!-- Attach the base -->
+  <base name="base" color="Grey" />
+
+  <!-- Add the drive wheels -->
+  <wheel parent="base" suffix="1" color="Orange" type="continuous"
+         origin_xyz="0.19419 0.00022708 -0.042" origin_rpy="-1.5708 0 -1.5708" />
+  <wheel parent="base" suffix="2" color="Orange" type="continuous"
+         origin_xyz="-0.096968 -0.16833 -0.042" origin_rpy="-1.5708 0 2.618" />
+  <wheel parent="base" suffix="3" color="Orange" type="continuous"
+         origin_xyz="-0.097362 0.1681 -0.042"   origin_rpy="-1.5708 0 0.5236" />
+
+  <!-- Attach the arm -->
+  <lift  name="lift"  parent="base" color="White" />
+  <waist name="waist" parent="lift" color="White" />
+  <big_arm name="big_arm" parent="waist" color="White" />
+  <forearm name="forearm" parent="big_arm" color="White" />
+  <wrist_pitching name="wrist_pitching" parent="forearm" color="White" />
+  <wrist_rotation name="wrist_rotation" parent="wrist_pitching" color="White" />
+
+  <!-- Attach the gripper -->
+  <finger_left  name="finger_left"  parent="wrist_rotation" color="Green" type="revolute" />
+  <finger_right name="finger_right" parent="wrist_rotation" color="Green" type="revolute" />
+
+  <!-- Attach the camera -->
+  <camera name="camera" parent="kinect" color="Black" />
+
+  <!-- Attach the kinect -->
+  <kinect name="kinect" parent="base" color="Black" type="revolute" />
+
+  <!-- Attach the laser -->
+  <laser name="laser" parent="base" color="Black" />
+
+</robot>
+  
